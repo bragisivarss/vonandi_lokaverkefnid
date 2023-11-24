@@ -24,23 +24,36 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         title: Text(
           'Welcome Please Select a User',
-          style:
-              TextStyle(color: Theme.of(context).colorScheme.primaryContainer),
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
+          ),
         ),
       ),
-      body: ListView(
-        children: user
-            .map(
-              (user) => ListTile(
-                title: Text(user.name),
-                onTap: () {
-                  _selectUser();
-                },
-              ),
-            )
-            .toList(),
+      body: Container(
+        color: Theme.of(context).colorScheme.secondary,
+        child: ListView(
+          children: users
+              .map(
+                (user) => ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: AssetImage(user.imagePath),
+                  ),
+                  title: Text(
+                    user.name,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    ),
+                  ),
+                  onTap: () {
+                    _selectUser();
+                  },
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }

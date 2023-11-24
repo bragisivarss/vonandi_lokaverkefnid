@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lokaverkefni/screens/drinks.dart';
 import 'package:lokaverkefni/screens/login_screen.dart';
 /*
 final colorScheme = ColorScheme.fromSeed(
