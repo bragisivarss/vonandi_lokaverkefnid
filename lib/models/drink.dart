@@ -1,12 +1,13 @@
-import 'package:uuid/uuid.dart';
+import 'dart:io';
 
-const uuid = Uuid();
 
 class Drink{
-  Drink({required this.title, required this.about, required this.rating}) : id = uuid.v4();
+  Drink({required this.title, required this.about, required this.rating, required this.image, required this.userId, required this.username});
 
-  final String id;
+  final String userId;
   final String title;
   final String about;
-  final int rating;
+  final double rating;
+  final File image;
+  final String username;
 }

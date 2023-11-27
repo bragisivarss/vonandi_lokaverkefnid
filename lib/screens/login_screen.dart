@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lokaverkefni/models/user.dart';
+import 'package:lokaverkefni/models/users.dart';
 import 'package:lokaverkefni/screens/drinks.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -10,20 +11,30 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  void _selectUser() {
+ 
+  Users? selectedUser;
+
+  void _selectUser(Users user) {
     setState(() {
+      selectedUser = user;
+
+      if(selectedUser != null){
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (ctx) => const DrinksScreen(),
+          builder: (ctx) => DrinksScreen(selectedUser: selectedUser!),
         ),
       );
+      }
     });
+
   }
 
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 5,
+        shadowColor: const Color.fromARGB(116, 255, 13, 13),
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         title: Text(
           'Welcome Please Select a User',
@@ -37,19 +48,41 @@ class _LoginScreenState extends State<LoginScreen> {
         child: ListView(
           children: users
               .map(
-                (user) => ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: AssetImage(user.imagePath),
-                  ),
-                  title: Text(
-                    user.name,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSecondary,
+                (user) => Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white, 
+                    borderRadius: BorderRadius.circular(8), 
+                    border: Border.all(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSecondary, 
+                      width: 1, 
                     ),
                   ),
-                  onTap: () {
-                    _selectUser();
-                  },
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: AssetImage(user.imagePath),
+                      radius: 25, 
+                    ),
+                    title: Row(
+                      children: [
+                        const SizedBox(width: 10,),
+                        Text(
+                          user.name,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimaryContainer,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      _selectUser(user);
+                    },
+                  ),
                 ),
               )
               .toList(),

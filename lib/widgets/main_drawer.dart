@@ -1,39 +1,111 @@
 import 'package:flutter/material.dart';
+import 'package:lokaverkefni/screens/favorites.dart';
 import 'package:lokaverkefni/screens/login_screen.dart';
+import 'package:lokaverkefni/screens/profile_detail.dart';
 
 class MainDrawer extends StatefulWidget {
-  const MainDrawer({super.key, });
+  const MainDrawer({
+    super.key,
+  });
 
   @override
   State<MainDrawer> createState() => _MainDrawerState();
 }
 
 class _MainDrawerState extends State<MainDrawer> {
-   onSelectUser() {
+  onViewFavorite() {
     setState(() {
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx) => const LoginScreen(), ), (route) => false);
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => const FavoritesScreen(),
+        ),
+      );
+    });
+  }
+
+  onViewProfile() {
+    setState(() {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => const ProfileScreen(),
+        ),
+      );
+    });
+  }
+
+  onSelectUser() {
+    setState(() {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (ctx) => const LoginScreen(),
+          ),
+          (route) => false);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: 270,
       child: Column(
         children: [
-          const Padding(padding: EdgeInsets.only(top: 70),),
-          Text('What would you like to do?',
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            color: Theme.of(context).colorScheme.onPrimaryContainer
-          )
+          const Padding(
+            padding: EdgeInsets.only(top: 45),
           ),
-          const SizedBox(height: 30,),
+          Column(
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              Text(
+                'What would you like to do?',
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
           ListTile(
-            leading: const Icon(Icons.exit_to_app,
-            size: 26,
+            leading: const Icon(Icons.account_circle),
+            title: Text(
+              'View Profile',
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  fontSize: 18),
             ),
-            title: const Text('Switch User'),
-            onTap: onSelectUser
+            onTap: onViewProfile,
           ),
+          const SizedBox(
+            height: 20,
+          ),
+          ListTile(
+            leading: const Icon(Icons.favorite),
+            title: Text('Favorites',
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  fontSize: 18),
+            ),
+            onTap: onViewFavorite,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ListTile(
+              leading: const Icon(
+                Icons.exit_to_app,
+                size: 26,
+              ),
+              title: Text('Switch User',
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  fontSize: 18),
+              ),
+              onTap: onSelectUser),
         ],
       ),
     );
