@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lokaverkefni/models/drink.dart';
 import 'package:lokaverkefni/models/users.dart';
+import 'package:lokaverkefni/providers/favorites.dart';
 
 class DrinkDetailScreen extends ConsumerWidget {
-  const DrinkDetailScreen({super.key, required this.drink, required this.selectedUser});
+  const DrinkDetailScreen({
+    super.key,
+    required this.drink,
+    required this.selectedUser,
+  });
 
   final Users selectedUser;
 
@@ -12,18 +17,33 @@ class DrinkDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isFavorite =
+        ref.watch(favoriteDrinksNotifierProvider).contains(drink);
+
     return Scaffold(
       appBar: AppBar(
-        actions: [ 
-          IconButton
-          (onPressed: () {}, 
-          icon: const Icon(Icons.star)),
+        actions: [
+          IconButton(
+            onPressed: () {
+              if (isFavorite) {
+                ref
+                    .read(favoriteDrinksNotifierProvider.notifier)
+                    .removeFavoriteDrink(drink);
+              } else {
+                ref
+                    .read(favoriteDrinksNotifierProvider.notifier)
+                    .addFavoriteDrink(drink);
+              }
+            },
+            icon: Icon(isFavorite ? Icons.star : Icons.star_outline),
+          ),
         ],
         elevation: 5,
         shadowColor: const Color.fromARGB(116, 255, 13, 13),
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        title: Text(drink.title,
-        textAlign: TextAlign.center,
+        title: Text(
+          drink.title,
+          textAlign: TextAlign.center,
         ),
       ),
       body: Stack(
@@ -140,13 +160,18 @@ class DrinkDetailScreen extends ConsumerWidget {
                         fontSize: 30,
                         fontWeight: FontWeight.w500),
                   ),
-                  const SizedBox(height: 210,),
-                  Text('Review Posted by:\n ${drink.username}',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w500,),
+                  const SizedBox(
+                    height: 210,
+                  ),
+                  Text(
+                    'Review Posted by:\n ${drink.username}',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color:
+                              Theme.of(context).colorScheme.onPrimaryContainer,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w500,
+                        ),
                   ),
                 ],
               ),
