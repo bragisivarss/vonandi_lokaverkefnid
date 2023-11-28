@@ -31,6 +31,7 @@ class DrinkDetailScreen extends ConsumerWidget {
                     .removeFavoriteDrink(drink);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
+                    duration: const Duration(milliseconds: 350),
                     content: const Text('Removed From Favorites'),
                     action: SnackBarAction(
                       label: 'Undo',
@@ -48,6 +49,7 @@ class DrinkDetailScreen extends ConsumerWidget {
                     .addFavoriteDrink(drink);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
+                    duration: const Duration(milliseconds: 350),
                     content: const Text('Added to Favorites'),
                     action: SnackBarAction(
                       label: 'Undo',
