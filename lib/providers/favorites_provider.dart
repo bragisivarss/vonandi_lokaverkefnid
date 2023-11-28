@@ -21,7 +21,4 @@ class FavoriteDrinksNotifier extends StateNotifier<List<Drink>> {
     state = state.where((favoriteDrink) => favoriteDrink != drink).toList();
   }
 
-  bool isFavorite(Drink drink) {
-    return state.contains(drink);
-  }
 }

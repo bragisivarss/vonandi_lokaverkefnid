@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lokaverkefni/providers/favorites.dart';
+
+import 'package:lokaverkefni/providers/favorites_provider.dart';
 
 class FavoritesScreen extends ConsumerWidget {
   const FavoritesScreen({super.key});
@@ -8,7 +9,9 @@ class FavoritesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final favorites = ref.watch(favoriteDrinksProvider);
+    final favorites = ref.watch(favoriteDrinksNotifierProvider);
+
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -22,7 +25,11 @@ class FavoritesScreen extends ConsumerWidget {
           itemBuilder: (context, index) => Column(
             children: [ 
               ListTile(
+                leading: Image.file(favorites[index].image),
                 title: Text(favorites[index].title),
+                subtitle: Text( 
+                  'Rating: ${favorites[index].rating}'
+                ),
               ),
             ],
           ),),

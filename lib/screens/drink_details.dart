@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lokaverkefni/models/drink.dart';
 import 'package:lokaverkefni/models/users.dart';
-import 'package:lokaverkefni/providers/favorites.dart';
+import 'package:lokaverkefni/providers/favorites_provider.dart';
 
 class DrinkDetailScreen extends ConsumerWidget {
   const DrinkDetailScreen({
@@ -29,10 +29,36 @@ class DrinkDetailScreen extends ConsumerWidget {
                 ref
                     .read(favoriteDrinksNotifierProvider.notifier)
                     .removeFavoriteDrink(drink);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: const Text('Removed From Favorites'),
+                    action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {
+                        ref
+                            .read(favoriteDrinksNotifierProvider.notifier)
+                            .addFavoriteDrink(drink);
+                      },
+                    ),
+                  ),
+                );
               } else {
                 ref
                     .read(favoriteDrinksNotifierProvider.notifier)
                     .addFavoriteDrink(drink);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: const Text('Added to Favorites'),
+                    action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {
+                        ref
+                            .read(favoriteDrinksNotifierProvider.notifier)
+                            .removeFavoriteDrink(drink);
+                      },
+                    ),
+                  ),
+                );
               }
             },
             icon: Icon(isFavorite ? Icons.star : Icons.star_outline),

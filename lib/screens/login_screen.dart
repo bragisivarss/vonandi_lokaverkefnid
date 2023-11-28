@@ -11,25 +11,23 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
- 
   Users? selectedUser;
 
   void _selectUser(Users user) {
     setState(() {
       selectedUser = user;
 
-      if(selectedUser != null){
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (ctx) => DrinksScreen(selectedUser: selectedUser!),
-        ),
-      );
+      if (selectedUser != null) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (ctx) => DrinksScreen(selectedUser: selectedUser!),
+          ),
+        );
       }
     });
-
   }
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -49,33 +47,35 @@ class _LoginScreenState extends State<LoginScreen> {
           children: users
               .map(
                 (user) => Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white, 
-                    borderRadius: BorderRadius.circular(8), 
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSecondary, 
-                      width: 1, 
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      width: 1,
                     ),
                   ),
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundImage: AssetImage(user.imagePath),
-                      radius: 25, 
+                      radius: 25,
                     ),
                     title: Row(
                       children: [
-                        const SizedBox(width: 10,),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         Text(
                           user.name,
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimaryContainer,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold
-                          ),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
