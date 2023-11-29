@@ -28,29 +28,64 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 5,
         shadowColor: const Color.fromARGB(116, 255, 13, 13),
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        title: const Text('Profile'),
+        title: Text(
+          selectedUser.name,
+          style: TextStyle(fontSize: 26),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              child: TextFormField(
-                controller: _usernameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Username",
-                ),
+            Opacity(
+              opacity: 0.3,
+              child: Image.asset(
+                'lib/assets/drink.png',
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
               ),
             ),
-            const SizedBox(
-              width: 8,
+            Center(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      border:
+                          Border.all(color: const Color.fromARGB(73, 0, 0, 0)),
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                    child: Text(
+                      'Username',
+                      style:
+                          Theme.of(context).textTheme.displayLarge!.copyWith(),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    selectedUser.name,
+                    style:
+                        Theme.of(context).textTheme.displayMedium!.copyWith(),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Change Username'),
+                  )
+                ],
+              ),
             ),
-            ElevatedButton(
-                onPressed: () {}, child: const Text('Change Username')),
           ],
         ),
       ),
