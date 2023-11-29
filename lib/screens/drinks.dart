@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lokaverkefni/models/users.dart';
+import 'package:lokaverkefni/models/user.dart';
 import 'package:lokaverkefni/providers/user_drinks.dart';
 import 'package:lokaverkefni/screens/add_drink.dart';
 import 'package:lokaverkefni/widgets/drinks_list.dart';
 import 'package:lokaverkefni/widgets/main_drawer.dart';
+
+//This is the main page where you go from login page
+//from here you can view your favorite drinks view reviews from other users
+//and navigate to the drink detail screen
 
 class DrinksScreen extends ConsumerWidget {
   const DrinksScreen({super.key, required this.selectedUser});
@@ -27,7 +31,11 @@ class DrinksScreen extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => AddDrinkScreen(selectedUser: selectedUser),),);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => AddDrinkScreen(selectedUser: selectedUser),
+                ),
+              );
             },
             icon: const Icon(Icons.add),
           ),

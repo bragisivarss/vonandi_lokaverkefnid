@@ -3,15 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:lokaverkefni/providers/favorites_provider.dart';
 
+//This is the screen wich shows the user his/hers favorite drinks
+//Wich they have marked as favorites with the start in top right corner in the drink detail screen
+
 class FavoritesScreen extends ConsumerWidget {
   const FavoritesScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final favorites = ref.watch(favoriteDrinksNotifierProvider);
-
-    
 
     return Scaffold(
       appBar: AppBar(
@@ -21,18 +21,17 @@ class FavoritesScreen extends ConsumerWidget {
         title: const Text('Your Favorites'),
       ),
       body: ListView.builder(
-          itemCount: favorites.length,
-          itemBuilder: (context, index) => Column(
-            children: [ 
-              ListTile(
-                leading: Image.file(favorites[index].image),
-                title: Text(favorites[index].title),
-                subtitle: Text( 
-                  'Rating: ${favorites[index].rating}'
-                ),
-              ),
-            ],
-          ),),
+        itemCount: favorites.length,
+        itemBuilder: (context, index) => Column(
+          children: [
+            ListTile(
+              leading: Image.file(favorites[index].image),
+              title: Text(favorites[index].title),
+              subtitle: Text('Rating: ${favorites[index].rating}'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

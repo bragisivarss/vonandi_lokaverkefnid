@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lokaverkefni/models/drink.dart';
-import 'package:lokaverkefni/models/users.dart';
+import 'package:lokaverkefni/models/user.dart';
 import 'package:lokaverkefni/screens/drink_details.dart';
 
 class DrinksList extends ConsumerWidget {
-  const DrinksList({super.key, required this.drinks, required this.selectedUser});
+  const DrinksList(
+      {super.key, required this.drinks, required this.selectedUser});
 
   final Users selectedUser;
 
@@ -37,21 +38,20 @@ class DrinksList extends ConsumerWidget {
           drinks[index].title,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
-
               ),
         ),
         subtitle: Text(
-        'Rating: ${drinks[index].rating}'
-        ,
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-          color: Theme.of(context).colorScheme.onBackground,
-        ),
+          'Rating: ${drinks[index].rating}',
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
         ),
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (ctx) => DrinkDetailScreen(
-                drink: drinks[index], selectedUser: selectedUser,
+                drink: drinks[index],
+                selectedUser: selectedUser,
               ),
             ),
           );

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lokaverkefni/models/user.dart';
 import 'package:lokaverkefni/models/users.dart';
+import 'package:lokaverkefni/models/user.dart';
+
+//Profile screen where user can view information about his/her profile
+//here user can see his/her avg rating and how many reviews they have made
+//and change theyre username
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -10,7 +14,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
   Users selectedUser = users[0];
 
   final _usernameController = TextEditingController();
@@ -38,19 +41,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: TextFormField(
                 controller: _usernameController,
                 decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                  ),
+                  border: OutlineInputBorder(),
                   labelText: "Username",
                 ),
               ),
             ),
-            const SizedBox(width: 8,),
+            const SizedBox(
+              width: 8,
+            ),
             ElevatedButton(
-              onPressed: () {
-
-              }, 
-              child: const Text('Change Username')
-              ),
+                onPressed: () {}, child: const Text('Change Username')),
           ],
         ),
       ),

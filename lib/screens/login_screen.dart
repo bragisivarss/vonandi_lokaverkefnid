@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lokaverkefni/models/user.dart';
 import 'package:lokaverkefni/models/users.dart';
+import 'package:lokaverkefni/models/user.dart';
 import 'package:lokaverkefni/screens/drinks.dart';
+
+//this is the app starting page where the user can choose wich user they want to log in as
+//and in this file is the logic to start sending wich user is logged in to other files
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

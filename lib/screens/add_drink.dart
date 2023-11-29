@@ -3,15 +3,20 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lokaverkefni/models/categories.dart';
-import 'package:lokaverkefni/models/users.dart';
+import 'package:lokaverkefni/models/user.dart';
 import 'package:lokaverkefni/providers/user_drinks.dart';
 import 'package:lokaverkefni/widgets/image_input.dart';
 
+//Add Drink Screen a screen specially to accept information from a user
+//where user can add a review/rating and some information about a drink
+
 class AddDrinkScreen extends ConsumerStatefulWidget {
-  const AddDrinkScreen({super.key, required this.selectedUser,});
+  const AddDrinkScreen({
+    super.key,
+    required this.selectedUser,
+  });
 
   final Users selectedUser;
-
 
   @override
   ConsumerState<AddDrinkScreen> createState() {

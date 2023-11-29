@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lokaverkefni/models/drink.dart';
-import 'package:lokaverkefni/models/users.dart';
+import 'package:lokaverkefni/models/user.dart';
 import 'package:lokaverkefni/providers/favorites_provider.dart';
+
+//Drink detail screen for reviewing information about drink or add/remove drink from favorites
 
 class DrinkDetailScreen extends ConsumerWidget {
   const DrinkDetailScreen({
@@ -23,12 +25,13 @@ class DrinkDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          //Button to add drink to favorite or remove it
           IconButton(
             onPressed: () {
               if (isFavorite) {
                 ref
                     .read(favoriteDrinksNotifierProvider.notifier)
-                    .removeFavoriteDrink(drink);
+                    .removeFavoriteDrink(drink, selectedUser);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: const Duration(milliseconds: 350),
@@ -38,7 +41,7 @@ class DrinkDetailScreen extends ConsumerWidget {
                       onPressed: () {
                         ref
                             .read(favoriteDrinksNotifierProvider.notifier)
-                            .addFavoriteDrink(drink);
+                            .addFavoriteDrink(drink, selectedUser);
                       },
                     ),
                   ),
@@ -46,7 +49,7 @@ class DrinkDetailScreen extends ConsumerWidget {
               } else {
                 ref
                     .read(favoriteDrinksNotifierProvider.notifier)
-                    .addFavoriteDrink(drink);
+                    .addFavoriteDrink(drink, selectedUser);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: const Duration(milliseconds: 350),
@@ -56,7 +59,7 @@ class DrinkDetailScreen extends ConsumerWidget {
                       onPressed: () {
                         ref
                             .read(favoriteDrinksNotifierProvider.notifier)
-                            .removeFavoriteDrink(drink);
+                            .removeFavoriteDrink(drink, selectedUser);
                       },
                     ),
                   ),

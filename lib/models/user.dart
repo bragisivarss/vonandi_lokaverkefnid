@@ -1,7 +1,11 @@
+//Model for each user
 
-import 'package:lokaverkefni/models/users.dart';
-
-final users = [
-  Users(id: 'u1', name: 'User 1', imagePath: 'lib/assets/okei.jpg'),
-  Users(id: 'u2', name: 'User 2', imagePath: 'lib/assets/okei1.jpg'),
-];
+class Users {
+  Users(
+      {required this.id,
+      required this.name,
+      this.imagePath = 'lib/assets/okei.jpg'});
+  final String id;
+  final String name;
+  final String imagePath;
+}
