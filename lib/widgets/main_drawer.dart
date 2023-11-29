@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lokaverkefni/models/user.dart';
 import 'package:lokaverkefni/screens/favorites.dart';
 import 'package:lokaverkefni/screens/login_screen.dart';
 import 'package:lokaverkefni/screens/profile_detail.dart';
 
 class MainDrawer extends StatefulWidget {
-  const MainDrawer({
-    super.key,
-  });
+  const MainDrawer({super.key, required this.selectedUser});
+
+  final Users selectedUser;
 
   @override
   State<MainDrawer> createState() => _MainDrawerState();
@@ -17,7 +18,9 @@ class _MainDrawerState extends State<MainDrawer> {
     setState(() {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (ctx) => const FavoritesScreen(),
+          builder: (ctx) => FavoritesScreen(
+            selectedUser: selectedUser,
+          ),
         ),
       );
     });
@@ -85,8 +88,9 @@ class _MainDrawerState extends State<MainDrawer> {
           ),
           ListTile(
             leading: const Icon(Icons.favorite),
-            title: Text('Favorites',
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            title: Text(
+              'Favorites',
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: Theme.of(context).colorScheme.onPrimaryContainer,
                   fontSize: 18),
             ),
@@ -100,10 +104,11 @@ class _MainDrawerState extends State<MainDrawer> {
                 Icons.exit_to_app,
                 size: 26,
               ),
-              title: Text('Switch User',
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  fontSize: 18),
+              title: Text(
+                'Switch User',
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    fontSize: 18),
               ),
               onTap: onSelectUser),
         ],

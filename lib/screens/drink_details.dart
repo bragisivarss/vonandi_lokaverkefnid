@@ -19,54 +19,99 @@ class DrinkDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isFavorite =
-        ref.watch(favoriteDrinksNotifierProvider).contains(drink);
+    final isFavorite1 =
+        ref.watch(favoriteDrinksNotifierProvider1).contains(drink);
+
+    final isFavorite2 =
+        ref.watch(favoriteDrinksNotifierProvider2).contains(drink);
 
     return Scaffold(
       appBar: AppBar(
         actions: [
-          //Button to add drink to favorite or remove it
+          // Button to add drink to favorite or remove it
           IconButton(
             onPressed: () {
-              if (isFavorite) {
-                ref
-                    .read(favoriteDrinksNotifierProvider.notifier)
-                    .removeFavoriteDrink(drink, selectedUser);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    duration: const Duration(milliseconds: 350),
-                    content: const Text('Removed From Favorites'),
-                    action: SnackBarAction(
-                      label: 'Undo',
-                      onPressed: () {
-                        ref
-                            .read(favoriteDrinksNotifierProvider.notifier)
-                            .addFavoriteDrink(drink, selectedUser);
-                      },
+              if (selectedUser.id == 'u1') {
+                if (isFavorite1) {
+                  ref
+                      .read(favoriteDrinksNotifierProvider1.notifier)
+                      .removeFavoriteDrink(drink, selectedUser);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(milliseconds: 350),
+                      content: const Text('Removed From Favorites'),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          ref
+                              .read(favoriteDrinksNotifierProvider1.notifier)
+                              .addFavoriteDrink(drink, selectedUser);
+                        },
+                      ),
                     ),
-                  ),
-                );
-              } else {
-                ref
-                    .read(favoriteDrinksNotifierProvider.notifier)
-                    .addFavoriteDrink(drink, selectedUser);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    duration: const Duration(milliseconds: 350),
-                    content: const Text('Added to Favorites'),
-                    action: SnackBarAction(
-                      label: 'Undo',
-                      onPressed: () {
-                        ref
-                            .read(favoriteDrinksNotifierProvider.notifier)
-                            .removeFavoriteDrink(drink, selectedUser);
-                      },
+                  );
+                } else {
+                  ref
+                      .read(favoriteDrinksNotifierProvider1.notifier)
+                      .addFavoriteDrink(drink, selectedUser);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(milliseconds: 350),
+                      content: const Text('Added to Favorites'),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          ref
+                              .read(favoriteDrinksNotifierProvider1.notifier)
+                              .removeFavoriteDrink(drink, selectedUser);
+                        },
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
+              } else if (selectedUser.id == 'u2') {
+                if (isFavorite2) {
+                  ref
+                      .read(favoriteDrinksNotifierProvider2.notifier)
+                      .removeFavoriteDrink(drink, selectedUser);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(milliseconds: 350),
+                      content: const Text('Removed From Favorites'),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          ref
+                              .read(favoriteDrinksNotifierProvider2.notifier)
+                              .addFavoriteDrink(drink, selectedUser);
+                        },
+                      ),
+                    ),
+                  );
+                } else {
+                  ref
+                      .read(favoriteDrinksNotifierProvider2.notifier)
+                      .addFavoriteDrink(drink, selectedUser);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(milliseconds: 350),
+                      content: const Text('Added to Favorites'),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          ref
+                              .read(favoriteDrinksNotifierProvider2.notifier)
+                              .removeFavoriteDrink(drink, selectedUser);
+                        },
+                      ),
+                    ),
+                  );
+                }
               }
             },
-            icon: Icon(isFavorite ? Icons.star : Icons.star_outline),
+            icon: Icon(selectedUser.id == 'u1'
+                ? (isFavorite1 ? Icons.star : Icons.star_outline)
+                : (isFavorite2 ? Icons.star : Icons.star_outline)),
           ),
         ],
         elevation: 5,

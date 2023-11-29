@@ -20,7 +20,9 @@ class DrinksScreen extends ConsumerWidget {
     final userDrinks = ref.watch(userDrinksProvide);
 
     return Scaffold(
-      drawer: const MainDrawer(),
+      drawer: MainDrawer(
+        selectedUser: selectedUser,
+      ),
       appBar: AppBar(
         elevation: 5,
         shadowColor: const Color.fromARGB(116, 255, 13, 13),

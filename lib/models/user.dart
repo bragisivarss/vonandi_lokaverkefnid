@@ -1,7 +1,7 @@
 //Model for each user
 
 class Users {
-  Users(
+  const Users(
       {required this.id,
       required this.name,
       this.imagePath = 'lib/assets/okei.jpg'});
