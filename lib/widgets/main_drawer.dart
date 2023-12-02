@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lokaverkefni/models/user.dart';
 import 'package:lokaverkefni/screens/favorites.dart';
 import 'package:lokaverkefni/screens/login_screen.dart';
 import 'package:lokaverkefni/screens/profile_detail.dart';
 
-class MainDrawer extends StatefulWidget {
+class MainDrawer extends ConsumerStatefulWidget {
   const MainDrawer({super.key, required this.selectedUser});
 
   final Users selectedUser;
 
   @override
-  State<MainDrawer> createState() => _MainDrawerState();
+  ConsumerState<MainDrawer> createState() => _MainDrawerState();
 }
 
-class _MainDrawerState extends State<MainDrawer> {
+class _MainDrawerState extends ConsumerState<MainDrawer> {
   onViewFavorite() {
     setState(() {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (ctx) => FavoritesScreen(
-            selectedUser: selectedUser,
-          ),
+          builder: (ctx) => const FavoritesScreen(),
         ),
       );
     });

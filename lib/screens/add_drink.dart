@@ -6,6 +6,7 @@ import 'package:lokaverkefni/models/categories.dart';
 import 'package:lokaverkefni/models/user.dart';
 import 'package:lokaverkefni/providers/user_drinks.dart';
 import 'package:lokaverkefni/widgets/image_input.dart';
+import 'package:http/http.dart' as http;
 
 //Add Drink Screen a screen specially to accept information from a user
 //where user can add a review/rating and some information about a drink

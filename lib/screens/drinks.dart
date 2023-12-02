@@ -27,8 +27,8 @@ class DrinksScreen extends ConsumerWidget {
         elevation: 5,
         shadowColor: const Color.fromARGB(116, 255, 13, 13),
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        title: Text(
-          'Drinks Overview - ${selectedUser.name}',
+        title: const Text(
+          'Drinks Overview',
         ),
         actions: [
           IconButton(

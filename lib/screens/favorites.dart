@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lokaverkefni/models/user.dart';
-import 'package:lokaverkefni/models/users.dart';
-
 import 'package:lokaverkefni/providers/favorites_provider.dart';
 
 //This is the screen wich shows the user his/hers favorite drinks
 //Wich they have marked as favorites with the start in top right corner in the drink detail screen
 
 class FavoritesScreen extends ConsumerWidget {
-  const FavoritesScreen({super.key, required this.selectedUser});
+  const FavoritesScreen({
+    super.key, //required this.selectedUser
+  });
 
-  final Users selectedUser;
+  //final Users selectedUser;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lokaverkefni/models/users.dart';
 import 'package:lokaverkefni/models/user.dart';
 
-//Profile screen where user can view information about his/her profile
+//Profile screen where user can view ition about his/her profile
 //here user can see his/her avg rating and how many reviews they have made
 //and change theyre username
 
@@ -14,6 +14,44 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  //int getReviewCount() {
+  //return selectedUser.reviews.length;
+  //}
+
+  //Function to change username
+  void _showChangeUsernameDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Change Username'),
+          content: TextField(
+            controller: _usernameController,
+            decoration: const InputDecoration(labelText: 'New Username'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  selectedUser.name = _usernameController.text;
+                });
+                Navigator.of(context).pop();
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  //Make sure right user profile is shown on screen
   Users selectedUser = users[0];
 
   final _usernameController = TextEditingController();
@@ -34,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         title: Text(
           selectedUser.name,
-          style: TextStyle(fontSize: 26),
+          style: const TextStyle(fontSize: 26),
         ),
       ),
       body: Padding(
@@ -80,9 +118,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 10,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: _showChangeUsernameDialog,
                     child: const Text('Change Username'),
-                  )
+                  ),
+                  //Text(
+                  //'Reviews: ${getReviewCount()}',
+                  //style:
+                  //Theme.of(context).textTheme.displayMedium!.copyWith(),
+                  //),
                 ],
               ),
             ),

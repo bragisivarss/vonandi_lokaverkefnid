@@ -1,11 +1,11 @@
 //Model for each user
 
 class Users {
-  const Users(
+  Users(
       {required this.id,
       required this.name,
       this.imagePath = 'lib/assets/okei.jpg'});
   final String id;
-  final String name;
+  String name;
   final String imagePath;
 }
